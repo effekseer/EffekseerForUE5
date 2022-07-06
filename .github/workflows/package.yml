@@ -1,0 +1,29 @@
+name: package
+
+on:
+  push:
+    branches:    
+      - master
+      - 15x
+      - 16x      
+    tags:
+      - v*
+
+jobs:
+  build:
+
+    runs-on: windows-2019
+    
+    steps:
+    - uses: actions/checkout@v2
+    - name: release
+      shell: bash
+      run: |
+        ls -la
+        python CreatePackage.py
+    - uses: actions/upload-artifact@v1
+      with:
+        name: EffekseerForUE4_162d
+        path: EffekseerForUE4
+  
+
